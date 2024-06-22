@@ -13,7 +13,11 @@ export default class UserController {
     // this.bookService = new BookService()
   }
 
-  public async login () {
+  public create = async () => {
+    const user: IUser = {...this.req.body}
+    const newUser = await this.userService.create(user)
+    return this.res.status(201).json({message: "User registered"})
+  }
 
   }
 }
