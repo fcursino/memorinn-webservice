@@ -40,4 +40,9 @@ export default class UserODM {
   public async deleteUserById(id: string) {
     await this.model.findOneAndDelete({_id: id})
   }
+
+  public async getUserByEmail(email: string) {
+    const user = await this.model.findOne({email: email})
+    return user
+  }
 }

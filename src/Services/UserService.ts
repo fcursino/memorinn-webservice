@@ -1,6 +1,7 @@
 import IUser from "../Interfaces/IUser";
 import UserODM from "../Models/UserODM";
 import User from "../Domains/User";
+import ICredentials from "../Interfaces/ICredentials";
 
 export default class UserService {
   private userODM = new UserODM();
@@ -32,5 +33,12 @@ export default class UserService {
 
   public async deleteUserById(id: string) {
     await this.userODM.deleteUserById(id)
+  }
+
+  public async loginUser(credentials: ICredentials) {
+    const user = await this.userODM.getUserByEmail(credentials.email)
+    if(!user) return null
+    if(!(credentials.password === user.password)) return null
+    return this.createUser(user)
   }
 }
