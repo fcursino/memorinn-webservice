@@ -24,7 +24,7 @@ export default class UserController {
 
   public async loginUser () {
     const credentials: ICredentials = {...this.req.body}
-    const user = await this.userService.loginUser(credentials)
-    this.res.status(201).json(user)
+    const login = await this.userService.loginUser(credentials)
+    this.res.status(201).json(login)
   }
 }

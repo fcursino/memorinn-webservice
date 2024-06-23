@@ -2,6 +2,7 @@ import IUser from "../Interfaces/IUser";
 import UserODM from "../Models/UserODM";
 import User from "../Domains/User";
 import ICredentials from "../Interfaces/ICredentials";
+import jwt from 'jsonwebtoken'
 
 export default class UserService {
   private userODM = new UserODM();
@@ -39,6 +40,7 @@ export default class UserService {
     const user = await this.userODM.getUserByEmail(credentials.email)
     if(!user) return null
     if(!(credentials.password === user.password)) return null
-    return this.createUser(user)
+    const token = jwt.sign(JSON.stringify(user), process.env.JWT_SECRET || '')
+    return {user: this.createUser(user), token}
   }
 }
