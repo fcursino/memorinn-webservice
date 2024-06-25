@@ -23,25 +23,25 @@ export default class BookController {
 
   public async getAllBooks() {
     const books = await this.bookService.getAllBooks()
-    return this.res.status(201).json(books)
+    return this.res.status(200).json(books)
   }
 
   public async getBookById() {
     const {id} = this.req.params
     const book = await this.bookService.getBookById(id)
-    return this.res.status(201).json(book)
+    return this.res.status(200).json(book)
   }
 
   public async updateBookById() {
     const {id} = this.req.params
     const book: IBook = {...this.req.body}
     const updateBook = await this.bookService.updateBookById(id, book)
-    return this.res.status(201).json(updateBook)
+    return this.res.status(200).json(updateBook)
   }
 
   public async deleteBookById() {
     const {id} = this.req.params
     await this.bookService.deleteBookById(id)
-    return this.res.status(201).json({message: "Book deleted"})
+    return this.res.status(200).json({message: "Book deleted"})
   }
 }
