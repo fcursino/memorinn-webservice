@@ -1,5 +1,6 @@
 import { NextFunction, Request, Response } from 'express';
 import jwt from 'jsonwebtoken'
+import IUser from '../Interfaces/IUser';
 
 function verifyAccessToken (req: Request, res: Response, next: NextFunction) {
   const token = req.headers['authorization'];
@@ -8,6 +9,8 @@ function verifyAccessToken (req: Request, res: Response, next: NextFunction) {
 
   jwt.verify(token, process.env.JWT_SECRET, (err, decoded) => {
     if (err) return res.status(403).json({ message: 'Failed to authenticate token' });
+    console.log(decoded)
+    req.body.id = decoded
     next();
   });
 }
