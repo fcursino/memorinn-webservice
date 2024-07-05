@@ -9,7 +9,7 @@ export default class CommentODM {
     this.schema = new Schema<IComment>({
       text: { type: String, required: true },
       userOwner: { type: Object, required: true },
-      bookId: { type: Number, required: true }
+      bookId: { type: String, required: true }
     })
 
     this.model = models.Comments || model("Comments", this.schema);
