@@ -44,4 +44,10 @@ export default class CommentController {
     await this.commentService.deleteCommentById(id)
     return this.res.status(200).json({message: "Comment deleted"})
   }
+
+  public async getCommentsByBook() {
+    const {bookId} = this.req.body
+    const comments = await this.commentService.getCommentsByBook(bookId)
+    return this.res.status(200).json(comments)
+  }
 }
