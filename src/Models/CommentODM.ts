@@ -39,4 +39,9 @@ export default class CommentODM {
   public async deleteCommentById(id: string) {
     await this.model.findOneAndDelete({_id: id})
   }
+
+  public async getCommentsByBook(bookId: string) {
+    const books = await this.model.find({bookId: bookId})
+    return books
+  }
 }

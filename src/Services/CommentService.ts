@@ -33,4 +33,9 @@ export default class CommentService {
   public async deleteCommentById(id: string) {
     await this.commentODM.deleteCommentById(id)
   }
+
+  public async getCommentsByBook(bookId: string) {
+    const comments = await this.commentODM.getCommentsByBook(bookId)
+    return comments.map(comment => this.createComment(comment))
+  }
 }
