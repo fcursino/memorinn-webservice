@@ -19,7 +19,7 @@ export default class UserController {
   public create = async () => {
     const user: IUser = {...this.req.body}
     const newUser = await this.userService.create(user)
-    return this.res.status(201).json({message: "User registered"})
+    return this.res.status(201).json(newUser)
   }
 
   public async loginUser () {

@@ -12,6 +12,8 @@ export default class UserService {
   }
 
   create = async (user: IUser) => {
+    const userUsingEmail = await this.userODM.getUserByEmail(user.email)
+    if(userUsingEmail) return null
     const newUser = await this.userODM.create(user)
     return this.createUser(newUser)
   }
