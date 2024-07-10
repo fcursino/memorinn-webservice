@@ -8,7 +8,6 @@ function verifyAccessToken (req: Request, res: Response, next: NextFunction) {
 
   jwt.verify(token, process.env.JWT_SECRET, (err, decoded) => {
     if (err) return res.status(403).json({ message: 'Failed to authenticate token' });
-    req.body.id = decoded
     next();
   });
 }
