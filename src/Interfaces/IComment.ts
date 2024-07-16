@@ -5,4 +5,5 @@ export default interface IComment {
   text: string;
   userOwner: IUser;
   bookId: string;
+  date: string;
 }

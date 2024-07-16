@@ -16,8 +16,9 @@ export default class CommentController {
   }
 
   public create = async () => {
-    const comment: IComment = {...this.req.body}
+    const comment: Partial<IComment> = {...this.req.body}
     const newComment = await this.commentService.create(comment)
+    console.log(newComment)
     return this.res.status(201).json({message: "Comment registered"})
   }
 

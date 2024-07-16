@@ -9,14 +9,16 @@ export default class CommentODM {
     this.schema = new Schema<IComment>({
       text: { type: String, required: true },
       userOwner: { type: Object, required: true },
-      bookId: { type: String, required: true }
+      bookId: { type: String, required: true },
+      date: { type: String, required: true }
     })
 
     this.model = models.Comments || model("Comments", this.schema);
   }
 
-  public async create(comment: IComment) {
-    return this.model.create({...comment})
+  public async create(comment: Partial<IComment>, date: string) {
+    console.log({...comment, date})
+    return this.model.create({...comment, date})
   }
 
   public async getAllComments() {

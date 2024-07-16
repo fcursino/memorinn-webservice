@@ -6,11 +6,13 @@ export default class Comment {
   protected text: string;
   protected userOwner: IUser;
   protected bookId: string;
+  protected date: string;
 
   constructor(comment: IComment) {
     this.id = comment.id;
     this.text = comment.text;
     this.userOwner = comment.userOwner;
     this.bookId = comment.bookId;
+    this.date = comment.date;
   }
 }
