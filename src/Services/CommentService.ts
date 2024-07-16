@@ -9,8 +9,15 @@ export default class CommentService {
     return new Comment(comment);
   }
 
-  create = async (comment: IComment) => {
-    const newComment = await this.commentODM.create(comment)
+  private registerCommentDate() {
+    console.log(new Date().toISOString())
+    return new Date().toISOString()
+  }
+
+  create = async (comment: Partial<IComment>) => {
+    const date = this.registerCommentDate()
+    const newComment = await this.commentODM.create(comment, date)
+    console.log(newComment)
     return this.createComment(newComment)
   }
 
