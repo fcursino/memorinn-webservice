@@ -6,4 +6,5 @@ export default interface IComment {
   userOwner: IUser;
   bookId: string;
   date: string;
+  accepted?: number;
 }

@@ -10,15 +10,15 @@ export default class CommentODM {
       text: { type: String, required: true },
       userOwner: { type: Object, required: true },
       bookId: { type: String, required: true },
-      date: { type: String, required: true }
+      date: { type: String, required: true },
+      accepted: { type: String, required: false }
     })
 
     this.model = models.Comments || model("Comments", this.schema);
   }
 
-  public async create(comment: Partial<IComment>, date: string) {
-    console.log({...comment, date})
-    return this.model.create({...comment, date})
+  public async create(comment: Partial<IComment>, date: string, accepted: number) {
+    return this.model.create({...comment, date, accepted})
   }
 
   public async getAllComments() {

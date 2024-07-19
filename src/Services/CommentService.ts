@@ -15,7 +15,8 @@ export default class CommentService {
 
   create = async (comment: Partial<IComment>) => {
     const date = this.registerCommentDate()
-    const newComment = await this.commentODM.create(comment, date)
+    const newComment = await this.commentODM.create(comment, date, 0)
+    console.log(newComment)
     return this.createComment(newComment)
   }
 

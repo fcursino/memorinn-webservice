@@ -7,6 +7,7 @@ export default class Comment {
   protected userOwner: IUser;
   protected bookId: string;
   protected date: string;
+  protected accepted: number | undefined;
 
   constructor(comment: IComment) {
     this.id = comment.id;
@@ -14,5 +15,6 @@ export default class Comment {
     this.userOwner = comment.userOwner;
     this.bookId = comment.bookId;
     this.date = comment.date;
+    this.accepted = comment.accepted;
   }
 }
