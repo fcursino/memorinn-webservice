@@ -38,11 +38,23 @@ export default class UserService {
     await this.userODM.deleteUserById(id)
   }
 
-  public async loginUser(credentials: ICredentials) {
-    const user = await this.userODM.getUserByEmail(credentials.email)
-    if(!user) return null
+  public async loginUser(credentials: ICredentials, loginToken: string) {
+    const user = await this.userODM.getUserByEmail(credentials.email || "")
+    if(!user) return this.verifyLoginToken(loginToken)
     if(!(credentials.password === user.password)) return null
-    const token = jwt.sign(JSON.stringify(user), process.env.JWT_SECRET || '')
+    const token = jwt.sign(JSON.stringify(user), process.env.JWT_SECRET || "")
     return {user: this.createUser(user), token}
+  }
+
+  private verifyLoginToken(loginToken: string) {
+    if(!loginToken) return null
+    try {
+      const result = JSON.stringify(jwt.verify(loginToken, process.env.JWT_SECRET || ""))
+      if(!(typeof result === "string")) return null
+      const user = {...JSON.parse(result)}
+      return {user: this.createUser({...user}), token: loginToken}
+    } catch(error) {
+      return null
+    }
   }
 }
