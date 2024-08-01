@@ -25,6 +25,11 @@ export default class CommentService {
     return comments.map(comment => this.createComment(comment))
   }
 
+  public async getAllAcceptedComments() {
+    const comments = await this.commentODM.getAllAcceptedComments()
+    return comments.map(comment => this.createComment(comment))
+  }
+
   public async getCommentById(id: string) {
     const comment = await this.commentODM.getCommentById(id)
     if(!comment) return null

@@ -26,6 +26,11 @@ export default class CommentODM {
     return books
   }
 
+  public async getAllAcceptedComments() {
+    const books = await this.model.find({accepted: 1})
+    return books
+  }
+
   public async getCommentById(id: string) {
     const comment = await this.model.findOne({_id: id})
     return comment
@@ -43,7 +48,7 @@ export default class CommentODM {
   }
 
   public async getCommentsByBook(bookId: string) {
-    const books = await this.model.find({bookId: bookId})
+    const books = await this.model.find({bookId: bookId, accepted: 1})
     return books
   }
 }

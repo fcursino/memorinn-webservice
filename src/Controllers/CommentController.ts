@@ -26,6 +26,11 @@ export default class CommentController {
     return this.res.status(200).json(comments)
   }
 
+  public async getAllAcceptedComments() {
+    const comments = await this.commentService.getAllAcceptedComments()
+    return this.res.status(200).json(comments)
+  }
+
   public async getCommentById() {
     const {id} = this.req.params
     const comment = await this.commentService.getCommentById(id)
